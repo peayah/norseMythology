@@ -6,8 +6,11 @@ const PORT = 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
-MongoClient.connect('mongodb-connection-string', (err, client) => {
-  // 
+const connectionString = 'mongodb+srv://nadmin:PHAOmiEMEOLLjX9U@cluster0.mgtfo.mongodb.net/?retryWrites=true&w=majority'
+
+MongoClient.connect(connectionString, (err, client) => {
+    if (err) return console.error(err)
+    console.log('Connected to Database')
 })
 
 // Handlers
@@ -16,7 +19,7 @@ app.get("/", (req,res) => {
 })
 
 app.post("/gods", (req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
 })
 
 
