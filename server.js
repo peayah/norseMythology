@@ -14,7 +14,13 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
         console.log('Connected to Database')
         const db = client.db("nordic-gods-and-domains")
         const godCollection = db.collection("gods")
+
+        // Middleware
+        // ========================
+        app.set('view engine', 'ejs')
         
+        // Routes
+        // ========================
         app.post("/gods", (req, res) => {
             godCollection.insertOne(req.body)
             .then(result => {
@@ -23,17 +29,19 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
             })
             .catch(error => console.error(RangeError))
         })
+
+        app.get("/", (req, res) => {
+
+            db.collection("gods").find().toArray()
+            .then(results => {
+                console.log(results)
+            })
+            .catch(error => console.log(error))
+            // res.sendFile(__dirname + "/index.html")
+        })
     
     })
     .catch(console.error)
-
-// Handlers
-app.get("/", (req,res) => {
-    res.sendFile(__dirname + "/index.html")
-})
-
-
-
 
 app.listen(PORT, function() {
     console.log(`\nServer is running on ${ PORT } now.\n`)
