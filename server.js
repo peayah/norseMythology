@@ -1,9 +1,14 @@
 const express = require("express");
 const bodyParser= require('body-parser')
 const app = express();
-const PORT = 3000
+const MongoClient = require('mongodb').MongoClient;
+const PORT = 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }))
+
+MongoClient.connect('mongodb-connection-string', (err, client) => {
+  // 
+})
 
 // Handlers
 app.get("/", (req,res) => {
