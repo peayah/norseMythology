@@ -30,7 +30,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
                 res.redirect("/")
             })
             .catch(error => console.error(RangeError))
-        })
+        }) // end post
 
         app.get("/", (req, res) => {
 
@@ -41,13 +41,14 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
             })
             .catch(error => console.log(error))
             
-        })
+        }) // end get
 
         app.put("/gods", (req, res) => {
             console.log(req.body)
-        })
+        }) // end put
     
-    })
+
+    }) // end then statement
     .catch(console.error)
 
 app.listen(PORT, function() {
