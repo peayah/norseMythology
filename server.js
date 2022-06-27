@@ -8,10 +8,14 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 const connectionString = 'mongodb+srv://nadmin:PHAOmiEMEOLLjX9U@cluster0.mgtfo.mongodb.net/?retryWrites=true&w=majority'
 
-MongoClient.connect(connectionString, (err, client) => {
-    if (err) return console.error(err)
-    console.log('Connected to Database')
-})
+MongoClient.connect(connectionString, { useUnifiedTopology: true })
+    
+    .then(client => {
+        console.log('Connected to Database')
+        const db = client.db("nordic-gods-and-domains")
+        const godCollection = db.collection("gods")
+    })
+    .catch(console.error)
 
 // Handlers
 app.get("/", (req,res) => {
