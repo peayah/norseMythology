@@ -18,6 +18,24 @@
         
         <button type="submit">Submit</button>
     </form>
+
+    <h2> Nordic gods and their domains </h2>
+    
+    <ul class="list">
+        <!-- Loop through gods -->
+        <% for(var i=0; i < gods.length; i++) {%>
+            <li class="entry">
+                <!-- Output name of god and their domain -->
+                <span>
+                    <%= gods[i].god %>
+                </span>:
+                <!-- Output quote from the iterated quote object -->
+                <span>
+                    <%= gods[i].domain %>
+                </span>
+            </li>
+            <% } %>
+    </ul>
 </body>
 
 </html>
