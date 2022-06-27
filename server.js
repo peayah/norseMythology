@@ -18,7 +18,8 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
         // Middleware
         // ========================
         app.set('view engine', 'ejs')
-        
+        app.use(express.static('public'))
+
         // Routes
         // ========================
         app.post("/gods", (req, res) => {
