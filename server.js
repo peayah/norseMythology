@@ -17,8 +17,9 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 
         // Middleware
         // ========================
-        app.set('view engine', 'ejs')
-        app.use(express.static('public'))
+        app.set('view engine', 'ejs')   // allow ejs
+        app.use(express.static('public')) //main.js
+        app.use(bodyParser.json()) // parsing returned json
 
         // Routes
         // ========================
