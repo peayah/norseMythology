@@ -5,9 +5,16 @@ update.addEventListener('click', _ => {
         method: "put",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            god: 'Thor',
-            domain: 'Thunder',
-            desc: 'Brother of Loki'
+            'god': god,
+            'domain': domain,
+            'desc': desc
         })
+    })
+    .then(response => {
+        if (response.ok) return response.json()
+    })
+    .then(data => {
+        console.log(data)
+        window.location.reload(true)
     })
 })
