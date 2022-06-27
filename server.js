@@ -1,5 +1,6 @@
 const express = require("express");
-const bodyParser= require('body-parser')
+const bodyParser= require('body-parser');
+const { response } = require("express");
 const app = express();
 const MongoClient = require('mongodb').MongoClient;
 const PORT = 3000;
@@ -34,7 +35,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 
         app.get("/", (req, res) => {
 
-            db.collection("gods").find().toArray()
+            godCollection.find().toArray()
             .then(results => {
                 // console.log(results)
                 res.render("index.ejs", {gods: results})
@@ -46,6 +47,15 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
         app.put("/gods", (req, res) => {
             console.log(req.body)
         }) // end put
+
+        app.delete('deleteGod', (req, res) => {
+            godCollection.deleteOne({ god: req.body.god})
+            .then(result => {
+                console.log("god delted")
+                response.json("god delted")
+            })  
+            .catch(error => console.error(error))
+        })
     
 
     }) // end then statement
