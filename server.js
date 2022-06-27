@@ -14,6 +14,16 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
         console.log('Connected to Database')
         const db = client.db("nordic-gods-and-domains")
         const godCollection = db.collection("gods")
+        
+        app.post("/gods", (req, res) => {
+            godCollection.insertOne(req.body)
+            .then(result => {
+                // refresh
+                res.redirect("/")
+            })
+            .catch(error => console.error(RangeError))
+        })
+    
     })
     .catch(console.error)
 
@@ -22,9 +32,7 @@ app.get("/", (req,res) => {
     res.sendFile(__dirname + "/index.html")
 })
 
-app.post("/gods", (req, res) => {
-    // console.log(req.body)
-})
+
 
 
 app.listen(PORT, function() {
