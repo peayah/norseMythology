@@ -37,7 +37,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
                 console.log(results)
             })
             .catch(error => console.log(error))
-            // res.sendFile(__dirname + "/index.html")
+            res.render("index.ejs", {})
         })
     
     })
