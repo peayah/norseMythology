@@ -36,11 +36,15 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 
             db.collection("gods").find().toArray()
             .then(results => {
-                console.log(results)
+                // console.log(results)
                 res.render("index.ejs", {gods: results})
             })
             .catch(error => console.log(error))
             
+        })
+
+        app.put("/gods", (req, res) => {
+            console.log(req.body)
         })
     
     })
