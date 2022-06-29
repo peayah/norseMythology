@@ -24,13 +24,13 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 
         // Routes
         // ========================
-        app.post("/gods", (req, res) => {
+        app.post("/addGod", (req, res) => {
             godCollection.insertOne(req.body)
             .then(result => {
                 // refresh
                 res.redirect("/")
             })
-            .catch(error => console.error(RangeError))
+            .catch(error => console.error(error))
         }) // end post
 
         app.get("/", (req, res) => {
@@ -48,18 +48,19 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
             console.log(req.body)
         }) // end put
 
-        app.delete('deleteGod', (req, res) => {
-            godCollection.deleteOne({ god: req.body.god})
+        app.delete('/deleteGod', (req, res) => {
+            console.log(`req ${ req[0] } and res ${ res[0] }`)
+            godCollection.deleteOne({god: req.body.godS}) //, domain: req.body.domainS, desc: req.body.descS})
             .then(result => {
-                console.log("god delted")
-                response.json("god delted")
-            })  
+                // refresh
+                console.log('Entry Deleted')
+                response.json('Entry Deleted')
+                // res.redirect("/")
+            })
             .catch(error => console.error(error))
-        })
-    
+        }) // end delete
 
-    }) // end then statement
-    .catch(console.error)
+        })
 
 app.listen(PORT, function() {
     console.log(`\nServer is running on ${ PORT } now.\n`)
