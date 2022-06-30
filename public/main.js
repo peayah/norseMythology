@@ -1,5 +1,7 @@
 const deleteText = document.querySelectorAll(".fa-trash")
 const updateText = document.querySelectorAll(".fa-check")
+var elements = document.getElementsByClassName("classname");
+
 
 Array.from(deleteText).forEach((element) => {
     // console.log("do we even get here")
@@ -7,22 +9,26 @@ Array.from(deleteText).forEach((element) => {
 })
 
 async function deleteGod() {
-    const sName = this.parentNode.parentNode.childNodes[3].innerText
-    // console.log(aName)
-    // const sName = this.parentNode.childNodes[1].innerText
-
+    console.log("the bucket was clicked")
+    const gName = this.parentNode.parentNode.childNodes[3].innerText
+    console.log(`we're looking to delete ${gName}`)
     try {
-        const response = await fetch('deleteGod', {
+        const response = await fetch('/deleteGod', {
             method: "delete",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-            'godS': sName,
+            'god': gName
             })
         })
-        const data = await response.json()
-        console.log(data)
-        location.reload()
-        } catch(err) {
+        .then(response => {
+            if(response.ok) return response.json()
+            
+        })
+        .then(data => {
+            window.location.reload()
+        })
+
+    } catch(err) {
             console.log(err)
         }
     }
