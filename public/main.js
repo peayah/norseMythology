@@ -17,7 +17,7 @@ async function deleteGod() {
             method: "delete",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-            'god': gName
+            'god': gName.trim()
             })
         })
         .then(response => {
